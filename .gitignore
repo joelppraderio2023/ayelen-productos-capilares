@@ -1,0 +1,5 @@
+# Carpeta de build para deploy (se genera copiando index.html)
+dist/
+
+# Wrangler / Cloudflare
+.wrangler/
