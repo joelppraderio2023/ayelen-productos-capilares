@@ -193,6 +193,21 @@
   .card .consultar:hover{ background:rgba(37,211,102,.22); }
   .card .consultar svg{ width:18px; height:18px; }
 
+  /* ====== Galería de productos ====== */
+  .gallery-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .gallery-grid figure{
+    position:relative; margin:0; border-radius:var(--radius); overflow:hidden;
+    border:1px solid rgba(217,182,118,.3); aspect-ratio:4/5;
+    box-shadow:0 10px 26px rgba(0,0,0,.4);
+  }
+  .gallery-grid img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .55s ease; }
+  .gallery-grid figure:hover img{ transform:scale(1.06); }
+  .gallery-grid figure::after{
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(180deg, transparent 55%, rgba(22,10,18,.5));
+  }
+  .gallery-cta{ text-align:center; margin-top:34px; }
+
   /* ====== CTA final ====== */
   .cta-final{ text-align:center; background:var(--bg-2); }
   .cta-box{
@@ -243,6 +258,7 @@
     .hero .cta-row .btn{ width:auto; }
     .benefits-grid{ grid-template-columns:repeat(3,1fr); }
     .catalog-grid{ grid-template-columns:repeat(2,1fr); }
+    .gallery-grid{ grid-template-columns:repeat(3,1fr); gap:18px; }
   }
   @media (min-width:960px){
     .section-pad{ padding:100px 0; }
@@ -327,6 +343,28 @@
     </div>
     <div class="catalog-grid" id="catalog-grid">
       <!-- las tarjetas se generan con JS desde la lista de abajo -->
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALERÍA ================= -->
+<section class="gallery section-pad" id="productos">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Galería</span>
+      <h2 class="gold-text">Nuestros productos</h2>
+      <p>Una muestra de nuestra línea de alisados y tratamientos. Escribinos para consultar por el que buscás.</p>
+    </div>
+    <div class="gallery-grid">
+      <figure class="reveal"><img src="fotos/prod-3.jpeg" alt="Línea de alisados Ayelen en distintos colores" loading="lazy"></figure>
+      <figure class="reveal"><img src="fotos/prod-6.jpeg" alt="Variedad de tratamientos capilares Ayelen" loading="lazy"></figure>
+      <figure class="reveal"><img src="fotos/prod-4.jpeg" alt="Productos capilares Ayelen" loading="lazy"></figure>
+      <figure class="reveal"><img src="fotos/prod-5.jpeg" alt="Alisados Ayelen tonos rosados" loading="lazy"></figure>
+      <figure class="reveal"><img src="fotos/prod-1.jpeg" alt="Alisado Ayelen botella rosa" loading="lazy"></figure>
+      <figure class="reveal"><img src="fotos/prod-2.jpeg" alt="Alisado Ayelen botella celeste" loading="lazy"></figure>
+    </div>
+    <div class="gallery-cta reveal">
+      <a class="btn btn-gold" href="https://wa.me/5491176665975?text=Hola%20Ayelen!%20Vi%20los%20productos%20y%20quiero%20m%C3%A1s%20info%20%E2%9C%A8" target="_blank" rel="noopener">Quiero más info</a>
     </div>
   </div>
 </section>
