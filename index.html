@@ -138,10 +138,36 @@
 
   /* ====== Secciones genéricas ====== */
   section{ position:relative; }
-  .section-pad{ padding:72px 0; }
-  .section-head{ text-align:center; max-width:640px; margin:0 auto 44px; }
-  .section-head .kicker{ font-family:'Cormorant Garamond',serif; letter-spacing:5px; text-transform:uppercase; font-size:.78rem; color:var(--gold); display:block; margin-bottom:10px; }
-  .section-head h2{ font-size:clamp(2rem,7vw,3rem); }
+  .section-pad{ position:relative; padding:78px 0; }
+  .section-pad > .wrap{ position:relative; z-index:1; }
+
+  /* hairline dorada que separa una sección de la anterior */
+  .divide-top::before{
+    content:''; position:absolute; top:0; left:50%; transform:translateX(-50%);
+    width:min(88%, 1000px); height:1px; z-index:2;
+    background:linear-gradient(90deg, transparent, rgba(217,182,118,.55), transparent);
+  }
+
+  /* glow decorativo de fondo (da profundidad a las secciones oscuras) */
+  .glow{ overflow:hidden; }
+  .glow::after{
+    content:''; position:absolute; z-index:0; pointer-events:none;
+    width:75vw; max-width:640px; aspect-ratio:1; border-radius:50%;
+    filter:blur(95px); opacity:.18; top:-12%; left:50%; transform:translateX(-50%);
+  }
+  .glow-lila::after{ background:radial-gradient(circle, #8a57a3, transparent 70%); }
+  .glow-gold::after{ background:radial-gradient(circle, #b98f4f, transparent 70%); }
+
+  .section-head{ text-align:center; max-width:640px; margin:0 auto 46px; }
+  .section-head .kicker{
+    font-family:'Cormorant Garamond',serif; letter-spacing:5px; text-transform:uppercase;
+    font-size:.78rem; color:var(--gold);
+    display:inline-flex; align-items:center; gap:14px; margin-bottom:12px;
+  }
+  .section-head .kicker::before, .section-head .kicker::after{
+    content:''; width:32px; height:1px; background:var(--gold); opacity:.55;
+  }
+  .section-head h2{ font-size:clamp(2.1rem,7vw,3.1rem); }
   .section-head p{ color:var(--text-dim); margin-top:14px; }
 
   /* ====== Beneficios ====== */
@@ -151,7 +177,9 @@
     text-align:center; padding:30px 22px; border-radius:var(--radius);
     background:linear-gradient(160deg, rgba(199,154,214,.06), rgba(217,182,118,.04));
     border:1px solid rgba(217,182,118,.16);
+    transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
   }
+  .benefit:hover{ transform:translateY(-4px); border-color:rgba(217,182,118,.42); box-shadow:0 16px 34px rgba(0,0,0,.32); }
   .benefit .ic{
     width:58px; height:58px; margin:0 auto 16px; border-radius:50%;
     display:flex; align-items:center; justify-content:center;
@@ -194,6 +222,7 @@
   .card .consultar svg{ width:18px; height:18px; }
 
   /* ====== Galería de productos ====== */
+  .gallery{ background:var(--bg-2); }
   .gallery-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
   .gallery-grid figure{
     position:relative; margin:0; border-radius:var(--radius); overflow:hidden;
@@ -209,7 +238,7 @@
   .gallery-cta{ text-align:center; margin-top:34px; }
 
   /* ====== CTA final ====== */
-  .cta-final{ text-align:center; background:var(--bg-2); }
+  .cta-final{ text-align:center; background:var(--bg); }
   .cta-box{
     border-radius:24px; padding:50px 26px;
     background:linear-gradient(155deg, rgba(199,154,214,.1), rgba(217,182,118,.07));
@@ -311,7 +340,7 @@
 </section>
 
 <!-- ================= BENEFICIOS ================= -->
-<section class="benefits section-pad">
+<section class="benefits section-pad divide-top">
   <div class="wrap">
     <div class="benefits-grid">
       <div class="benefit reveal">
@@ -334,7 +363,7 @@
 </section>
 
 <!-- ================= CATÁLOGO ================= -->
-<section class="section-pad" id="catalogo">
+<section class="section-pad divide-top glow glow-lila" id="catalogo">
   <div class="wrap">
     <div class="section-head">
       <span class="kicker">Nuestra línea</span>
@@ -348,7 +377,7 @@
 </section>
 
 <!-- ================= GALERÍA ================= -->
-<section class="gallery section-pad" id="productos">
+<section class="gallery section-pad divide-top" id="productos">
   <div class="wrap">
     <div class="section-head">
       <span class="kicker">Galería</span>
@@ -370,7 +399,7 @@
 </section>
 
 <!-- ================= CTA FINAL ================= -->
-<section class="cta-final section-pad">
+<section class="cta-final section-pad divide-top glow glow-gold">
   <div class="wrap">
     <div class="cta-box reveal">
       <h2 class="gold-text">¿Lista para tu mejor liso?</h2>
