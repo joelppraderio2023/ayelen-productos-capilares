@@ -236,8 +236,20 @@
     border-radius:50px; padding:3px 12px; white-space:nowrap;
   }
 
+  /* ====== Resultados antes/después ====== */
+  .results{ background:var(--bg-2); }
+  .results-grid{ display:grid; grid-template-columns:1fr; gap:18px; }
+  .results-grid figure{
+    margin:0; border-radius:var(--radius); overflow:hidden;
+    border:1px solid rgba(217,182,118,.32);
+    box-shadow:0 12px 30px rgba(0,0,0,.45);
+    transition:transform .35s ease, box-shadow .35s ease;
+  }
+  .results-grid figure:hover{ transform:translateY(-4px); box-shadow:0 20px 44px rgba(0,0,0,.55); }
+  .results-grid img{ width:100%; height:auto; display:block; }
+
   /* ====== Galería de productos ====== */
-  .gallery{ background:var(--bg-2); }
+  .gallery{ background:var(--bg); }
   .gallery-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
   .gallery-grid figure{
     position:relative; margin:0; border-radius:var(--radius); overflow:hidden;
@@ -253,7 +265,7 @@
   .gallery-cta{ text-align:center; margin-top:34px; }
 
   /* ====== CTA final ====== */
-  .cta-final{ text-align:center; background:var(--bg); }
+  .cta-final{ text-align:center; background:var(--bg-2); }
   .cta-box{
     border-radius:24px; padding:50px 26px;
     background:linear-gradient(155deg, rgba(199,154,214,.1), rgba(217,182,118,.07));
@@ -303,6 +315,7 @@
     .benefits-grid{ grid-template-columns:repeat(3,1fr); }
     .catalog-grid{ grid-template-columns:repeat(2,1fr); }
     .gallery-grid{ grid-template-columns:repeat(3,1fr); gap:18px; }
+    .results-grid{ grid-template-columns:repeat(2,1fr); gap:22px; }
   }
   @media (min-width:960px){
     .section-pad{ padding:100px 0; }
@@ -387,6 +400,23 @@
     </div>
     <div id="catalog-cats">
       <!-- las categorías y tarjetas se generan con JS desde la lista de abajo -->
+    </div>
+  </div>
+</section>
+
+<!-- ================= RESULTADOS (ANTES / DESPUÉS) ================= -->
+<section class="results section-pad divide-top glow glow-gold" id="resultados">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Resultados reales</span>
+      <h2 class="gold-text">Antes y después</h2>
+      <p>Trabajos reales hechos con nuestros productos: de un cabello con frizz a un liso impecable.</p>
+    </div>
+    <div class="results-grid">
+      <figure class="reveal"><img src="fotos/antes-despues-espejo.jpeg" alt="Antes y después del Alisado Espejo" loading="lazy"></figure>
+      <figure class="reveal"><img src="fotos/antes-despues-japones.jpeg" alt="Antes y después del Alisado Japonés" loading="lazy"></figure>
+      <figure class="reveal"><img src="fotos/antes-despues-colageno-argan.jpeg" alt="Antes y después del Alisado Colágeno y Argán" loading="lazy"></figure>
+      <figure class="reveal"><img src="fotos/antes-despues-nutricion-colageno.jpeg" alt="Antes y después de la Nutrición Colágeno y Argán" loading="lazy"></figure>
     </div>
   </div>
 </section>
