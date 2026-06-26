@@ -16,20 +16,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-  /* ====== Variables / tema glam ====== */
+  /* ====== Variables / tema claro ====== */
   :root{
-    --bg:        #160a12;          /* berenjena casi negro */
-    --bg-2:      #1f0f1a;          /* tarjetas / secciones */
-    --bg-3:      #281320;
-    --gold:      #d9b676;
-    --gold-soft: #e9d2a3;
-    --lila:      #c79ad6;
-    --lila-soft: #e0c6ea;
-    --text:      #f4ecf1;
-    --text-dim:  #c9b9c5;
+    --bg:        #fbf5f9;          /* lavanda-rosado muy claro */
+    --bg-2:      #f4e9f1;          /* lavanda claro */
+    --bg-3:      #ffffff;          /* tarjetas */
+    --gold:      #b1842f;          /* dorado oscuro para fondo claro */
+    --gold-soft: #c79a4e;
+    --lila:      #9b5fb5;
+    --lila-soft: #834fa3;
+    --text:      #3a2433;          /* ciruela profundo */
+    --text-dim:  #6f5868;          /* gris-ciruela suave */
     --whatsapp:  #25D366;
-    --gold-grad: linear-gradient(135deg, #e9d2a3 0%, #d9b676 45%, #b98f4f 100%);
-    --lila-grad: linear-gradient(135deg, #e0c6ea 0%, #c79ad6 50%, #9d6db0 100%);
+    --gold-grad: linear-gradient(135deg, #c79a4e 0%, #b1842f 55%, #94701f 100%);
+    --lila-grad: linear-gradient(135deg, #b07cc8 0%, #9b5fb5 50%, #834fa3 100%);
     --radius: 18px;
     --maxw: 1100px;
   }
@@ -76,15 +76,15 @@
   }
   .btn-wa:hover{ transform:translateY(-2px); box-shadow:0 12px 30px rgba(37,211,102,.4); }
   .btn-ghost{
-    background:transparent; color:var(--gold-soft);
-    border:1.5px solid rgba(217,182,118,.55);
+    background:transparent; color:var(--lila-soft);
+    border:1.5px solid rgba(155,95,181,.5);
   }
-  .btn-ghost:hover{ background:rgba(217,182,118,.1); transform:translateY(-2px); }
+  .btn-ghost:hover{ background:rgba(155,95,181,.1); transform:translateY(-2px); }
   .btn-gold{
-    background:var(--gold-grad); color:#2a1605; font-weight:600;
-    box-shadow:0 8px 24px rgba(217,182,118,.25);
+    background:var(--gold-grad); color:#fff; font-weight:600;
+    box-shadow:0 8px 24px rgba(177,132,47,.3);
   }
-  .btn-gold:hover{ transform:translateY(-2px); box-shadow:0 12px 30px rgba(217,182,118,.4); }
+  .btn-gold:hover{ transform:translateY(-2px); box-shadow:0 12px 30px rgba(177,132,47,.45); }
   .btn svg{ width:20px; height:20px; }
 
   /* ====== Header ====== */
@@ -94,9 +94,9 @@
     padding:16px 0;
   }
   header.scrolled{
-    background:rgba(22,10,18,.85);
+    background:rgba(251,245,249,.88);
     backdrop-filter:blur(12px);
-    box-shadow:0 1px 0 rgba(217,182,118,.18);
+    box-shadow:0 2px 18px rgba(120,80,110,.12);
     padding:10px 0;
   }
   .nav{ display:flex; align-items:center; justify-content:space-between; }
@@ -111,13 +111,14 @@
     display:flex; align-items:center; justify-content:center; text-align:center;
     padding:120px 0 70px;
     overflow:hidden;
+    background:linear-gradient(180deg, #f1e3f2 0%, #fbf5f9 60%);
   }
   /* halos de color de fondo */
   .hero::before, .hero::after{
     content:''; position:absolute; border-radius:50%; filter:blur(80px); opacity:.55; z-index:0;
   }
-  .hero::before{ width:60vw; height:60vw; max-width:520px; max-height:520px; background:radial-gradient(circle,#7d4f95,transparent 70%); top:-10%; right:-15%; }
-  .hero::after{ width:55vw; height:55vw; max-width:480px; max-height:480px; background:radial-gradient(circle,#a87a3f,transparent 70%); bottom:-15%; left:-15%; opacity:.4; }
+  .hero::before{ width:60vw; height:60vw; max-width:520px; max-height:520px; background:radial-gradient(circle,#e0bcec,transparent 70%); top:-10%; right:-15%; }
+  .hero::after{ width:55vw; height:55vw; max-width:480px; max-height:480px; background:radial-gradient(circle,#f7d6ac,transparent 70%); bottom:-15%; left:-15%; opacity:.5; }
   .hero .wrap{ position:relative; z-index:2; }
 
   .hero .eyebrow{
@@ -145,18 +146,18 @@
   .divide-top::before{
     content:''; position:absolute; top:0; left:50%; transform:translateX(-50%);
     width:min(88%, 1000px); height:1px; z-index:2;
-    background:linear-gradient(90deg, transparent, rgba(217,182,118,.55), transparent);
+    background:linear-gradient(90deg, transparent, rgba(177,132,47,.45), transparent);
   }
 
-  /* glow decorativo de fondo (da profundidad a las secciones oscuras) */
+  /* glow decorativo de fondo (da un toque de color suave a la sección) */
   .glow{ overflow:hidden; }
   .glow::after{
     content:''; position:absolute; z-index:0; pointer-events:none;
     width:75vw; max-width:640px; aspect-ratio:1; border-radius:50%;
-    filter:blur(95px); opacity:.18; top:-12%; left:50%; transform:translateX(-50%);
+    filter:blur(95px); opacity:.4; top:-12%; left:50%; transform:translateX(-50%);
   }
-  .glow-lila::after{ background:radial-gradient(circle, #8a57a3, transparent 70%); }
-  .glow-gold::after{ background:radial-gradient(circle, #b98f4f, transparent 70%); }
+  .glow-lila::after{ background:radial-gradient(circle, #dcb6ea, transparent 70%); }
+  .glow-gold::after{ background:radial-gradient(circle, #f3d7ad, transparent 70%); }
 
   .section-head{ text-align:center; max-width:640px; margin:0 auto 46px; }
   .section-head .kicker{
@@ -171,31 +172,33 @@
   .section-head p{ color:var(--text-dim); margin-top:14px; }
 
   /* ====== Beneficios ====== */
-  .benefits{ background:linear-gradient(165deg, #251227 0%, #180b16 100%); }
+  .benefits{ background:#ffffff; }
   .benefits-grid{ display:grid; grid-template-columns:1fr; gap:30px; }
   .benefit{ text-align:center; padding:6px 14px; position:relative; }
   .benefit .ic{ transition:transform .3s ease; }
   .benefit:hover .ic{ transform:translateY(-4px) scale(1.05); }
   .benefit .ic{
-    width:58px; height:58px; margin:0 auto 16px; border-radius:50%;
+    width:62px; height:62px; margin:0 auto 16px; border-radius:50%;
     display:flex; align-items:center; justify-content:center;
-    background:var(--gold-grad); color:#2a1605;
+    background:var(--gold-grad); color:#fff;
+    box-shadow:0 8px 20px rgba(120,80,110,.18);
   }
-  .benefits-grid .benefit:nth-child(1) .ic{ background:linear-gradient(135deg,#d9aee8,#a86fc0); }
-  .benefits-grid .benefit:nth-child(2) .ic{ background:linear-gradient(135deg,#f2a7c0,#d56f93); }
-  .benefits-grid .benefit:nth-child(3) .ic{ background:linear-gradient(135deg,#9fe0d8,#5bb5ab); }
+  .benefits-grid .benefit:nth-child(1) .ic{ background:linear-gradient(135deg,#b07cc8,#8a4fa8); }
+  .benefits-grid .benefit:nth-child(2) .ic{ background:linear-gradient(135deg,#e98aaa,#d85f86); }
+  .benefits-grid .benefit:nth-child(3) .ic{ background:linear-gradient(135deg,#5cc6ba,#2fa89a); }
   .benefit .ic svg{ width:28px; height:28px; }
-  .benefit h3{ font-size:1.45rem; color:var(--gold-soft); margin-bottom:8px; }
+  .benefit h3{ font-size:1.45rem; color:var(--text); margin-bottom:8px; }
   .benefit p{ color:var(--text-dim); font-size:.95rem; }
 
   /* ====== Catálogo ====== */
-  #catalogo{ background:linear-gradient(165deg, #1b0c1a 0%, #120810 100%); }
+  #catalogo{ background:linear-gradient(180deg, #f2e6f1 0%, #f8eff6 100%); }
   .catalog-grid{ display:grid; grid-template-columns:1fr; gap:18px; }
   .card{
     position:relative; display:flex; flex-direction:column;
     padding:26px 22px 24px; border-radius:var(--radius);
-    background:linear-gradient(165deg, var(--bg-3), var(--bg-2));
-    border:1px solid rgba(217,182,118,.22);
+    background:#ffffff;
+    border:1px solid rgba(58,36,51,.08);
+    box-shadow:0 6px 20px rgba(120,80,110,.08);
     overflow:hidden; transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
   }
   .card::before{
@@ -205,16 +208,16 @@
     -webkit-mask-composite:xor; mask-composite:exclude;
     opacity:0; transition:opacity .3s ease; pointer-events:none;
   }
-  .card:hover{ transform:translateY(-4px); border-color:var(--accent, rgba(217,182,118,.5)); box-shadow:0 18px 40px rgba(0,0,0,.45); }
+  .card:hover{ transform:translateY(-4px); border-color:var(--accent, rgba(177,132,47,.5)); box-shadow:0 16px 36px rgba(120,80,110,.20); }
   .card:hover::before{ opacity:1; }
   .card .tag{
     display:inline-block; align-self:flex-start;
     font-family:'Montserrat',sans-serif; letter-spacing:1.5px; text-transform:uppercase;
-    font-size:.6rem; font-weight:700; color:#23121c;
+    font-size:.6rem; font-weight:700; color:#ffffff;
     background:var(--accent, var(--gold)); padding:4px 12px; border-radius:50px; margin-bottom:12px;
   }
   .card h3{ font-size:1.7rem; color:var(--text); margin-bottom:10px; }
-  .card h3 .a{ color:var(--gold-soft); }
+  .card h3 .a{ color:var(--text); }
   .card p{ color:var(--text-dim); font-size:.92rem; flex:1; margin-bottom:18px; }
   .card .consultar{
     display:inline-flex; align-items:center; gap:8px; align-self:flex-start;
@@ -250,19 +253,19 @@
     display:flex; align-items:center; justify-content:center;
     transition:background .25s ease, color .25s ease, transform .2s ease;
   }
-  .cnav:hover{ background:var(--accent, var(--gold)); color:#1a0d14; }
+  .cnav:hover{ background:var(--accent, var(--gold)); color:#ffffff; }
   .cnav:active{ transform:scale(.92); }
 
   /* ====== Carrusel del catálogo ====== */
   .catalog-carousel{
     display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory;
     padding:6px 2px 16px; margin:0 -2px;
-    scrollbar-width:thin; scrollbar-color:var(--accent, var(--gold)) rgba(255,255,255,.06);
+    scrollbar-width:thin; scrollbar-color:var(--accent, var(--gold)) rgba(58,36,51,.10);
     -webkit-overflow-scrolling:touch;
   }
   .catalog-carousel::-webkit-scrollbar{ height:6px; }
   .catalog-carousel::-webkit-scrollbar-thumb{ background:var(--accent, var(--gold)); border-radius:50px; }
-  .catalog-carousel::-webkit-scrollbar-track{ background:rgba(255,255,255,.06); border-radius:50px; }
+  .catalog-carousel::-webkit-scrollbar-track{ background:rgba(58,36,51,.10); border-radius:50px; }
   .catalog-carousel .card{ flex:0 0 80%; max-width:320px; scroll-snap-align:start; }
   @media (min-width:600px){ .catalog-carousel .card{ flex-basis:44%; } .cat-nav{ display:flex; } }
   @media (min-width:960px){ .catalog-carousel .card{ flex-basis:30%; } }
@@ -275,24 +278,24 @@
   }
 
   /* ====== Resultados antes/después ====== */
-  .results{ background:linear-gradient(165deg, #241a13 0%, #160e0a 100%); }
+  .results{ background:linear-gradient(180deg, #fdeee2 0%, #fef6f0 100%); }
   .results-grid{ display:grid; grid-template-columns:1fr; gap:18px; }
   .results-grid figure{
     margin:0; border-radius:var(--radius); overflow:hidden;
-    border:1px solid rgba(217,182,118,.32);
-    box-shadow:0 12px 30px rgba(0,0,0,.45);
+    border:1px solid rgba(177,132,47,.3);
+    box-shadow:0 12px 30px rgba(120,80,110,.18);
     transition:transform .35s ease, box-shadow .35s ease;
   }
-  .results-grid figure:hover{ transform:translateY(-4px); box-shadow:0 20px 44px rgba(0,0,0,.55); }
+  .results-grid figure:hover{ transform:translateY(-4px); box-shadow:0 20px 44px rgba(120,80,110,.28); }
   .results-grid img{ width:100%; height:auto; display:block; }
 
   /* ====== Galería de productos ====== */
-  .gallery{ background:linear-gradient(165deg, #112321 0%, #0c1614 100%); }
+  .gallery{ background:linear-gradient(180deg, #e6f4ef 0%, #f1f9f5 100%); }
   .gallery-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
   .gallery-grid figure{
     position:relative; margin:0; border-radius:var(--radius); overflow:hidden;
-    border:1px solid rgba(217,182,118,.3); aspect-ratio:4/5;
-    box-shadow:0 10px 26px rgba(0,0,0,.4);
+    border:1px solid rgba(177,132,47,.25); aspect-ratio:4/5;
+    box-shadow:0 10px 26px rgba(120,80,110,.16);
   }
   .gallery-grid img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .55s ease; }
   .gallery-grid figure:hover img{ transform:scale(1.06); }
@@ -303,26 +306,27 @@
   .gallery-cta{ text-align:center; margin-top:34px; }
 
   /* ====== CTA final ====== */
-  .cta-final{ text-align:center; background:linear-gradient(165deg, #2a1422 0%, #190b13 100%); }
+  .cta-final{ text-align:center; background:linear-gradient(180deg, #fbe6ee 0%, #fdf0f5 100%); }
   .cta-box{
     border-radius:24px; padding:50px 26px;
-    background:linear-gradient(155deg, rgba(199,154,214,.1), rgba(217,182,118,.07));
-    border:1px solid rgba(217,182,118,.25);
+    background:rgba(255,255,255,.65);
+    border:1px solid rgba(155,95,181,.2);
+    box-shadow:0 14px 36px rgba(120,80,110,.14);
   }
   .cta-box h2{ font-size:clamp(2rem,7vw,2.8rem); margin-bottom:12px; }
   .cta-box p{ color:var(--text-dim); margin-bottom:26px; max-width:460px; margin-left:auto; margin-right:auto; }
   .cta-box .btn{ width:100%; max-width:340px; }
 
   /* ====== Footer ====== */
-  footer{ background:var(--bg); padding:46px 0 120px; text-align:center; border-top:1px solid rgba(217,182,118,.14); }
+  footer{ background:linear-gradient(180deg, #f3e7f1 0%, #efe0eb 100%); padding:46px 0 120px; text-align:center; border-top:1px solid rgba(177,132,47,.22); }
   footer .name{ font-family:'Great Vibes',cursive; font-size:2rem; color:var(--lila-soft); }
   footer .sub{ font-family:'Cormorant Garamond',serif; letter-spacing:4px; text-transform:uppercase; font-size:.66rem; color:var(--gold); margin-bottom:22px; }
   .socials{ display:flex; justify-content:center; gap:16px; margin-bottom:22px; }
   .socials a{
     width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center;
-    border:1px solid rgba(217,182,118,.4); color:var(--gold-soft); transition:all .25s ease;
+    border:1px solid rgba(155,95,181,.4); color:var(--lila-soft); transition:all .25s ease;
   }
-  .socials a:hover{ background:var(--gold-grad); color:#2a1605; transform:translateY(-3px); }
+  .socials a:hover{ background:var(--lila-grad); color:#ffffff; transform:translateY(-3px); border-color:transparent; }
   .socials a svg{ width:24px; height:24px; }
   footer .copy{ color:var(--text-dim); font-size:.8rem; opacity:.7; }
 
@@ -528,7 +532,7 @@
   // Las descripciones de Japonés y Diamante (alisados) son las textuales que pasó la clienta;
   // el resto son borradores a confirmar.
   var CATALOGO = [
-    { categoria:"Alisados", tag:"Alisado", wa:"Alisado", color:"#c79ad6", items:[
+    { categoria:"Alisados", tag:"Alisado", wa:"Alisado", color:"#9b5fb5", items:[
       { nombre:"Japonés",           desc:"Tratamiento térmico-químico que deja el pelo completamente liso y sedoso de forma permanente. Elimina el frizz, aporta brillo intenso y resiste la humedad sin usar plancha a diario." },
       { nombre:"Diamante",          desc:"Combina keratina, aceites nutritivos y micropartículas iluminadoras. Alisa la hebra capilar otorgándole una luminosidad y suavidad extremas." },
       { nombre:"3 en 1",            desc:"Limpia, alisa y nutre el cabello en un solo paso. Práctico y completo." },
@@ -544,7 +548,7 @@
       { nombre:"Ácido Hialurónico", desc:"Hidratación profunda que rellena y revitaliza la fibra." },
       { nombre:"Plex",              desc:"Reconstrucción de enlaces internos para un cabello fortalecido." }
     ]},
-    { categoria:"Nutriciones", tag:"Nutrición", wa:"Nutrición", color:"#ec8ba9", items:[
+    { categoria:"Nutriciones", tag:"Nutrición", wa:"Nutrición", color:"#d85f86", items:[
       { nombre:"Sandía",            desc:"Nutrición frutal que hidrata y aporta frescura y brillo." },
       { nombre:"Keratina",          desc:"Repone la keratina del cabello para fortalecerlo y suavizarlo." },
       { nombre:"Colágeno y Argán",  desc:"Repone elasticidad y nutrición con colágeno y argán." },
@@ -555,7 +559,7 @@
       { nombre:"Aceite de Coco",    desc:"Hidratación profunda con aceite de coco: suavidad y brillo natural." },
       { nombre:"Brasilera",         desc:"Nutrición intensa para un cabello suave y manejable." }
     ]},
-    { categoria:"Baños y Cremas", tag:"Cuidado", wa:"", color:"#5cc6ba", items:[
+    { categoria:"Baños y Cremas", tag:"Cuidado", wa:"", color:"#2fa89a", items:[
       { nombre:"Baño de Crema con Aceite de Coco", desc:"Hidratación y suavidad para el cuidado del día a día." },
       { nombre:"Baño de Seda",      desc:"Suaviza y desenreda dejando el cabello sedoso." },
       { nombre:"Crema Biota",       desc:"Crema de tratamiento que nutre y fortalece la fibra." },
@@ -565,7 +569,7 @@
       { nombre:"Nube Reparadora",   desc:"Mascarilla reparadora para cabellos dañados." },
       { nombre:"Célula Madre",      desc:"Tratamiento regenerador que revitaliza la fibra." }
     ]},
-    { categoria:"Tratamientos", tag:"Tratamiento", wa:"", color:"#e0b878", items:[
+    { categoria:"Tratamientos", tag:"Tratamiento", wa:"", color:"#c2922f", items:[
       { nombre:"Botox",                          desc:"Rellena y rejuvenece la fibra: menos frizz, más suavidad y brillo." },
       { nombre:"Queratina",                      desc:"Repone la queratina natural del cabello, lo fortalece y lo disciplina." },
       { nombre:"Biotina",                        desc:"Fortalece el cabello y le aporta cuerpo y vitalidad." },
