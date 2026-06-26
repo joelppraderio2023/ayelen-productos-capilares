@@ -230,22 +230,34 @@
   .card .consultar svg{ width:18px; height:18px; }
 
   /* ====== Grupos de categoría dentro del catálogo ====== */
-  .cat-group{ margin-bottom:54px; }
+  .cat-group{ margin-bottom:60px; }
   .cat-group:last-child{ margin-bottom:0; }
-  .cat-head{ display:flex; align-items:center; gap:14px; margin:0 0 20px; }
-  .cat-title{
-    flex:1; display:flex; align-items:center; gap:16px; margin:0;
-    font-family:'Cormorant Garamond',serif; font-weight:600;
-    font-size:1.8rem; color:var(--accent, var(--lila-soft));
+
+  /* banner con foto al inicio de cada categoría */
+  .cat-banner{
+    position:relative; border-radius:22px; overflow:hidden; margin-bottom:20px;
+    min-height:170px; box-shadow:0 12px 30px rgba(120,80,110,.16);
   }
-  .cat-title::after{ content:''; flex:1; height:1px; background:linear-gradient(90deg, var(--accent, var(--gold)), transparent); opacity:.5; }
-  .cat-title .count{
-    font-family:'Montserrat',sans-serif; font-weight:500; font-size:.74rem;
-    color:var(--accent, var(--gold)); border:1px solid var(--accent, rgba(217,182,118,.4));
-    border-radius:50px; padding:3px 12px; white-space:nowrap;
+  .cat-banner img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .cat-banner .ov{
+    position:relative; z-index:1; min-height:170px;
+    display:flex; flex-direction:column; justify-content:center; gap:9px;
+    padding:26px 28px;
+    background:linear-gradient(90deg, rgba(28,12,22,.8) 0%, rgba(28,12,22,.42) 55%, rgba(28,12,22,.05) 100%);
+    box-shadow:inset 7px 0 0 var(--accent, var(--gold));
   }
-  /* flechas del carrusel (solo desktop) */
-  .cat-nav{ display:none; gap:8px; }
+  .cat-banner .count{
+    align-self:flex-start; background:var(--accent, var(--gold)); color:#fff;
+    font-size:.62rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+    padding:4px 12px; border-radius:50px;
+  }
+  .cat-banner h3{ color:#fff; font-size:2.2rem; font-family:'Cormorant Garamond',serif; font-weight:600; line-height:1; }
+  .cat-banner .blurb{ color:rgba(255,255,255,.92); max-width:420px; font-size:.95rem; }
+
+  /* barra de flechas del carrusel (solo desktop) */
+  .cat-toolbar{ display:none; justify-content:flex-end; margin:0 0 12px; }
+  @media (min-width:600px){ .cat-toolbar{ display:flex; } }
+  .cat-nav{ display:flex; gap:8px; }
   .cnav{
     width:42px; height:42px; border-radius:50%; cursor:pointer;
     border:1px solid var(--accent, var(--gold)); background:transparent;
@@ -532,7 +544,8 @@
   // Las descripciones de Japonés y Diamante (alisados) son las textuales que pasó la clienta;
   // el resto son borradores a confirmar.
   var CATALOGO = [
-    { categoria:"Alisados", tag:"Alisado", wa:"Alisado", color:"#9b5fb5", items:[
+    { categoria:"Alisados", tag:"Alisado", wa:"Alisado", color:"#9b5fb5",
+      img:"fotos/prod-3.jpeg", blurb:"Liso, brillo y un acabado de salón que dura lavado tras lavado.", items:[
       { nombre:"Japonés",           desc:"Tratamiento térmico-químico que deja el pelo completamente liso y sedoso de forma permanente. Elimina el frizz, aporta brillo intenso y resiste la humedad sin usar plancha a diario." },
       { nombre:"Diamante",          desc:"Combina keratina, aceites nutritivos y micropartículas iluminadoras. Alisa la hebra capilar otorgándole una luminosidad y suavidad extremas." },
       { nombre:"3 en 1",            desc:"Limpia, alisa y nutre el cabello en un solo paso. Práctico y completo." },
@@ -548,7 +561,8 @@
       { nombre:"Ácido Hialurónico", desc:"Hidratación profunda que rellena y revitaliza la fibra." },
       { nombre:"Plex",              desc:"Reconstrucción de enlaces internos para un cabello fortalecido." }
     ]},
-    { categoria:"Nutriciones", tag:"Nutrición", wa:"Nutrición", color:"#d85f86", items:[
+    { categoria:"Nutriciones", tag:"Nutrición", wa:"Nutrición", color:"#d85f86",
+      img:"fotos/prod-4.jpeg", blurb:"Hidratación profunda para un cabello suave, sano y revitalizado.", items:[
       { nombre:"Sandía",            desc:"Nutrición frutal que hidrata y aporta frescura y brillo." },
       { nombre:"Keratina",          desc:"Repone la keratina del cabello para fortalecerlo y suavizarlo." },
       { nombre:"Colágeno y Argán",  desc:"Repone elasticidad y nutrición con colágeno y argán." },
@@ -559,7 +573,8 @@
       { nombre:"Aceite de Coco",    desc:"Hidratación profunda con aceite de coco: suavidad y brillo natural." },
       { nombre:"Brasilera",         desc:"Nutrición intensa para un cabello suave y manejable." }
     ]},
-    { categoria:"Baños y Cremas", tag:"Cuidado", wa:"", color:"#2fa89a", items:[
+    { categoria:"Baños y Cremas", tag:"Cuidado", wa:"", color:"#2fa89a",
+      img:"fotos/prod-6.jpeg", blurb:"El cuidado del día a día para mantener tu pelo nutrido y manejable.", items:[
       { nombre:"Baño de Crema con Aceite de Coco", desc:"Hidratación y suavidad para el cuidado del día a día." },
       { nombre:"Baño de Seda",      desc:"Suaviza y desenreda dejando el cabello sedoso." },
       { nombre:"Crema Biota",       desc:"Crema de tratamiento que nutre y fortalece la fibra." },
@@ -569,7 +584,8 @@
       { nombre:"Nube Reparadora",   desc:"Mascarilla reparadora para cabellos dañados." },
       { nombre:"Célula Madre",      desc:"Tratamiento regenerador que revitaliza la fibra." }
     ]},
-    { categoria:"Tratamientos", tag:"Tratamiento", wa:"", color:"#c2922f", items:[
+    { categoria:"Tratamientos", tag:"Tratamiento", wa:"", color:"#c2922f",
+      img:"fotos/prod-5.jpeg", blurb:"Soluciones específicas para fortalecer, reparar y revivir tu cabello.", items:[
       { nombre:"Botox",                          desc:"Rellena y rejuvenece la fibra: menos frizz, más suavidad y brillo." },
       { nombre:"Queratina",                      desc:"Repone la queratina natural del cabello, lo fortalece y lo disciplina." },
       { nombre:"Biotina",                        desc:"Fortalece el cabello y le aporta cuerpo y vitalidad." },
@@ -588,12 +604,21 @@
       group.className = 'cat-group';
       group.style.setProperty('--accent', cat.color);
 
-      // encabezado: título + contador + flechas
-      var head = document.createElement('div');
-      head.className = 'cat-head reveal';
-      var title = document.createElement('h3');
-      title.className = 'cat-title';
-      title.innerHTML = cat.categoria + '<span class="count">' + cat.items.length + ' opciones</span>';
+      // banner con foto + nombre + frase
+      var banner = document.createElement('div');
+      banner.className = 'cat-banner reveal';
+      banner.innerHTML =
+        '<img src="' + cat.img + '" alt="' + cat.categoria + ' Ayelen" loading="lazy">' +
+        '<div class="ov">' +
+          '<span class="count">' + cat.items.length + ' opciones</span>' +
+          '<h3>' + cat.categoria + '</h3>' +
+          '<p class="blurb">' + cat.blurb + '</p>' +
+        '</div>';
+      group.appendChild(banner);
+
+      // barra de flechas (desktop)
+      var toolbar = document.createElement('div');
+      toolbar.className = 'cat-toolbar';
       var nav = document.createElement('div');
       nav.className = 'cat-nav';
       var prev = document.createElement('button');
@@ -601,8 +626,8 @@
       var next = document.createElement('button');
       next.className = 'cnav'; next.type = 'button'; next.setAttribute('aria-label','Siguiente'); next.innerHTML = '›';
       nav.appendChild(prev); nav.appendChild(next);
-      head.appendChild(title); head.appendChild(nav);
-      group.appendChild(head);
+      toolbar.appendChild(nav);
+      group.appendChild(toolbar);
 
       // carrusel de tarjetas
       var car = document.createElement('div');
