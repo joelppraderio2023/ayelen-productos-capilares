@@ -29,12 +29,17 @@ Landing tipo catálogo elegante cuyo objetivo principal es que la persona **cont
 - Links de WhatsApp con mensaje pre-cargado por producto.
 - Animaciones suaves al hacer scroll.
 
-## Catálogo (por categorías, generado por JS en index.html)
-- **Alisados:** Japonés, Diamante, 3 en 1, XXL, Bio Plex, Cherry, Espejo, Extra Fuerte, Siliconado, Cirugía, Cristal, Colágeno y Argán, Ácido Hialurónico, Plex.
-- **Nutriciones:** Cirugía, Diamante, Aceite de Coco, Colágeno y Argán, Brasilera, Botox.
-- **Tratamientos:** Botox, Queratina, Biotina, Levanta Muerto, Oro Líquido, Matizador Violeta.
+## Catálogo (por categorías, generado por JS en index.html — cada categoría tiene color propio)
+- **Alisados** (lila): Japonés, Diamante, 3 en 1, XXL, Bio Plex, Cherry, Espejo, Extra Fuerte, Siliconado, Cirugía, Cristal, Colágeno y Argán, Ácido Hialurónico, Plex.
+- **Nutriciones** (rosa): Sandía, Keratina, Colágeno y Argán, Diamante, Plastificado, Botox, Cirugía, Aceite de Coco, Brasilera.
+- **Baños y Cremas** (aqua): Baño de Crema con Aceite de Coco, Baño de Seda, Crema Biota, Crema Mata Piojos, Bomba Unicornio, Bomba Brasilera, Nube Reparadora, Célula Madre.
+- **Tratamientos** (dorado): Botox, Queratina, Biotina, Restaurador Levanta Muerto, Matizador Acondicionador Violeta, Oro Líquido.
 
-Descripciones de **Japonés** y **Diamante** = textuales (las pasó la clienta). El resto son borradores a confirmar.
+Descripciones de **Japonés** y **Diamante** (alisados) = textuales (las pasó la clienta). El resto son borradores a confirmar.
+
+## Secciones de fotos
+- **Resultados (antes/después):** 4 fotos en `fotos/antes-despues-*.jpeg` (espejo, japonés, colágeno y argán, nutrición colágeno y argán).
+- **Galería de productos:** 6 fotos `fotos/prod-1..6.jpeg`.
 
 ## Pendientes / a revisar por la clienta
 - **Descripciones (borrador)**: todas menos Japonés y Diamante están redactadas por nosotros; la clienta debe revisarlas para que las propiedades de cada producto sean exactas.

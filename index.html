@@ -185,6 +185,9 @@
     display:flex; align-items:center; justify-content:center;
     background:var(--gold-grad); color:#2a1605;
   }
+  .benefits-grid .benefit:nth-child(1) .ic{ background:linear-gradient(135deg,#d9aee8,#a86fc0); }
+  .benefits-grid .benefit:nth-child(2) .ic{ background:linear-gradient(135deg,#f2a7c0,#d56f93); }
+  .benefits-grid .benefit:nth-child(3) .ic{ background:linear-gradient(135deg,#9fe0d8,#5bb5ab); }
   .benefit .ic svg{ width:28px; height:28px; }
   .benefit h3{ font-size:1.45rem; color:var(--gold-soft); margin-bottom:8px; }
   .benefit p{ color:var(--text-dim); font-size:.95rem; }
@@ -200,14 +203,19 @@
   }
   .card::before{
     content:''; position:absolute; inset:0; border-radius:var(--radius);
-    padding:1px; background:var(--gold-grad);
+    padding:1px; background:linear-gradient(135deg, var(--accent, var(--gold)), transparent 75%);
     -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite:xor; mask-composite:exclude;
     opacity:0; transition:opacity .3s ease; pointer-events:none;
   }
-  .card:hover{ transform:translateY(-4px); box-shadow:0 18px 40px rgba(0,0,0,.45); }
+  .card:hover{ transform:translateY(-4px); border-color:var(--accent, rgba(217,182,118,.5)); box-shadow:0 18px 40px rgba(0,0,0,.45); }
   .card:hover::before{ opacity:1; }
-  .card .tag{ font-family:'Cormorant Garamond',serif; letter-spacing:3px; text-transform:uppercase; font-size:.68rem; color:var(--lila); margin-bottom:6px; }
+  .card .tag{
+    display:inline-block; align-self:flex-start;
+    font-family:'Montserrat',sans-serif; letter-spacing:1.5px; text-transform:uppercase;
+    font-size:.6rem; font-weight:700; color:#23121c;
+    background:var(--accent, var(--gold)); padding:4px 12px; border-radius:50px; margin-bottom:12px;
+  }
   .card h3{ font-size:1.7rem; color:var(--text); margin-bottom:10px; }
   .card h3 .a{ color:var(--gold-soft); }
   .card p{ color:var(--text-dim); font-size:.92rem; flex:1; margin-bottom:18px; }
@@ -227,12 +235,12 @@
   .cat-title{
     display:flex; align-items:center; gap:16px; margin:0 0 24px;
     font-family:'Cormorant Garamond',serif; font-weight:600;
-    font-size:1.7rem; color:var(--lila-soft);
+    font-size:1.8rem; color:var(--accent, var(--lila-soft));
   }
-  .cat-title::after{ content:''; flex:1; height:1px; background:linear-gradient(90deg, rgba(217,182,118,.5), transparent); }
+  .cat-title::after{ content:''; flex:1; height:1px; background:linear-gradient(90deg, var(--accent, var(--gold)), transparent); opacity:.5; }
   .cat-title .count{
-    font-family:'Montserrat',sans-serif; font-weight:400; font-size:.74rem;
-    color:var(--gold); border:1px solid rgba(217,182,118,.4);
+    font-family:'Montserrat',sans-serif; font-weight:500; font-size:.74rem;
+    color:var(--accent, var(--gold)); border:1px solid var(--accent, rgba(217,182,118,.4));
     border-radius:50px; padding:3px 12px; white-space:nowrap;
   }
 
@@ -484,10 +492,12 @@
   var WHATSAPP = "5491176665975"; // número en formato internacional (54 9 11 ...)
 
   // Catálogo por categorías. La clienta puede editar nombre y descripción aquí.
-  // Las descripciones de Japonés y Diamante son las textuales que pasó la clienta;
+  // Cada categoría tiene un color propio (chip + título + bordes).
+  // "tag" = etiqueta del chip · "wa" = prefijo para el mensaje de WhatsApp (vacío = usar solo el nombre).
+  // Las descripciones de Japonés y Diamante (alisados) son las textuales que pasó la clienta;
   // el resto son borradores a confirmar.
   var CATALOGO = [
-    { categoria:"Alisados", etiqueta:"Alisado", items:[
+    { categoria:"Alisados", tag:"Alisado", wa:"Alisado", color:"#c79ad6", items:[
       { nombre:"Japonés",           desc:"Tratamiento térmico-químico que deja el pelo completamente liso y sedoso de forma permanente. Elimina el frizz, aporta brillo intenso y resiste la humedad sin usar plancha a diario." },
       { nombre:"Diamante",          desc:"Combina keratina, aceites nutritivos y micropartículas iluminadoras. Alisa la hebra capilar otorgándole una luminosidad y suavidad extremas." },
       { nombre:"3 en 1",            desc:"Limpia, alisa y nutre el cabello en un solo paso. Práctico y completo." },
@@ -503,21 +513,34 @@
       { nombre:"Ácido Hialurónico", desc:"Hidratación profunda que rellena y revitaliza la fibra." },
       { nombre:"Plex",              desc:"Reconstrucción de enlaces internos para un cabello fortalecido." }
     ]},
-    { categoria:"Nutriciones", etiqueta:"Nutrición", items:[
-      { nombre:"Cirugía",           desc:"Nutrición intensiva tipo cirugía capilar para cabellos muy dañados." },
-      { nombre:"Diamante",          desc:"Nutrición con acabado luminoso y suavidad de lujo." },
-      { nombre:"Aceite de Coco",    desc:"Hidratación profunda con aceite de coco: suavidad y brillo natural." },
+    { categoria:"Nutriciones", tag:"Nutrición", wa:"Nutrición", color:"#ec8ba9", items:[
+      { nombre:"Sandía",            desc:"Nutrición frutal que hidrata y aporta frescura y brillo." },
+      { nombre:"Keratina",          desc:"Repone la keratina del cabello para fortalecerlo y suavizarlo." },
       { nombre:"Colágeno y Argán",  desc:"Repone elasticidad y nutrición con colágeno y argán." },
-      { nombre:"Brasilera",         desc:"Nutrición intensa para un cabello suave y manejable." },
-      { nombre:"Botox",             desc:"Rellena, alisa y revitaliza la fibra capilar." }
+      { nombre:"Diamante",          desc:"Nutrición con acabado luminoso y suavidad de lujo." },
+      { nombre:"Plastificado",      desc:"Sella la fibra para un acabado liso, brillante y sin frizz." },
+      { nombre:"Botox",             desc:"Rellena, alisa y revitaliza la fibra capilar." },
+      { nombre:"Cirugía",           desc:"Nutrición intensiva tipo cirugía capilar para cabellos muy dañados." },
+      { nombre:"Aceite de Coco",    desc:"Hidratación profunda con aceite de coco: suavidad y brillo natural." },
+      { nombre:"Brasilera",         desc:"Nutrición intensa para un cabello suave y manejable." }
     ]},
-    { categoria:"Tratamientos", etiqueta:"Tratamiento", items:[
-      { nombre:"Botox",             desc:"Rellena y rejuvenece la fibra: menos frizz, más suavidad y brillo." },
-      { nombre:"Queratina",         desc:"Repone la queratina natural del cabello, lo fortalece y lo disciplina." },
-      { nombre:"Biotina",           desc:"Fortalece el cabello y le aporta cuerpo y vitalidad." },
-      { nombre:"Levanta Muerto",    desc:"Reactiva y revive cabellos apagados y sin vida." },
-      { nombre:"Oro Líquido",       desc:"Aceite multiuso que aporta brillo, suavidad y protección." },
-      { nombre:"Matizador Violeta", desc:"Acondicionador matizador que neutraliza los tonos amarillos en un paso." }
+    { categoria:"Baños y Cremas", tag:"Cuidado", wa:"", color:"#5cc6ba", items:[
+      { nombre:"Baño de Crema con Aceite de Coco", desc:"Hidratación y suavidad para el cuidado del día a día." },
+      { nombre:"Baño de Seda",      desc:"Suaviza y desenreda dejando el cabello sedoso." },
+      { nombre:"Crema Biota",       desc:"Crema de tratamiento que nutre y fortalece la fibra." },
+      { nombre:"Crema Mata Piojos", desc:"Tratamiento capilar para eliminar y prevenir piojos." },
+      { nombre:"Bomba Unicornio",   desc:"Hidratación intensa con un plus de color y brillo." },
+      { nombre:"Bomba Brasilera",   desc:"Tratamiento intensivo de nutrición profunda." },
+      { nombre:"Nube Reparadora",   desc:"Mascarilla reparadora para cabellos dañados." },
+      { nombre:"Célula Madre",      desc:"Tratamiento regenerador que revitaliza la fibra." }
+    ]},
+    { categoria:"Tratamientos", tag:"Tratamiento", wa:"", color:"#e0b878", items:[
+      { nombre:"Botox",                          desc:"Rellena y rejuvenece la fibra: menos frizz, más suavidad y brillo." },
+      { nombre:"Queratina",                      desc:"Repone la queratina natural del cabello, lo fortalece y lo disciplina." },
+      { nombre:"Biotina",                        desc:"Fortalece el cabello y le aporta cuerpo y vitalidad." },
+      { nombre:"Restaurador Levanta Muerto",     desc:"Reactiva y revive cabellos apagados y sin vida." },
+      { nombre:"Matizador Acondicionador Violeta", desc:"Neutraliza los tonos amarillos y acondiciona en un paso." },
+      { nombre:"Oro Líquido",                    desc:"Aceite multiuso que aporta brillo, suavidad y protección." }
     ]}
   ];
 
@@ -528,6 +551,7 @@
     CATALOGO.forEach(function(cat){
       var group = document.createElement('div');
       group.className = 'cat-group';
+      group.style.setProperty('--accent', cat.color);
 
       var title = document.createElement('h3');
       title.className = 'cat-title reveal';
@@ -537,12 +561,12 @@
       var grid = document.createElement('div');
       grid.className = 'catalog-grid';
       cat.items.forEach(function(p){
-        var nombreCompleto = cat.etiqueta + ' ' + p.nombre;
+        var nombreCompleto = (cat.wa ? cat.wa + ' ' : '') + p.nombre;
         var msg = encodeURIComponent("Hola Ayelen! Quiero consultar por el " + nombreCompleto + " 💜");
         var card = document.createElement('div');
         card.className = 'card reveal';
         card.innerHTML =
-          '<span class="tag">' + cat.etiqueta + '</span>' +
+          '<span class="tag">' + cat.tag + '</span>' +
           '<h3><span class="a">' + p.nombre + '</span></h3>' +
           '<p>' + p.desc + '</p>' +
           '<a class="consultar" target="_blank" rel="noopener" href="https://wa.me/' + WHATSAPP + '?text=' + msg + '">' +
