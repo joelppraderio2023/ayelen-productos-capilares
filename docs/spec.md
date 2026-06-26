@@ -29,10 +29,14 @@ Landing tipo catálogo elegante cuyo objetivo principal es que la persona **cont
 - Links de WhatsApp con mensaje pre-cargado por producto.
 - Animaciones suaves al hacer scroll.
 
-## Catálogo (14 alisados)
-3 en 1, XXL, Bioplex, Cherry, Espejo, Extra Fuerte, Siliconado, Cirugía, Diamante, Cristal, Japonés, Colágeno y Argán, Ácido Hialurónico, Plex.
+## Catálogo (por categorías, generado por JS en index.html)
+- **Alisados:** Japonés, Diamante, 3 en 1, XXL, Bio Plex, Cherry, Espejo, Extra Fuerte, Siliconado, Cirugía, Cristal, Colágeno y Argán, Ácido Hialurónico, Plex.
+- **Nutriciones:** Cirugía, Diamante, Aceite de Coco, Colágeno y Argán, Brasilera, Botox.
+- **Tratamientos:** Botox, Queratina, Biotina, Levanta Muerto, Oro Líquido, Matizador Violeta.
+
+Descripciones de **Japonés** y **Diamante** = textuales (las pasó la clienta). El resto son borradores a confirmar.
 
 ## Pendientes / a revisar por la clienta
-- **Micro-descripciones**: redactadas como borrador. La clienta debe revisarlas para que las propiedades de cada producto sean exactas.
+- **Descripciones (borrador)**: todas menos Japonés y Diamante están redactadas por nosotros; la clienta debe revisarlas para que las propiedades de cada producto sean exactas.
 - **Fotos**: las actuales (botella rosa sobre manta) no combinan con el look oscuro; el catálogo va en texto. Sección de galería futura cuando haya fotos con buen fondo.
 - Confirmar número de WhatsApp definitivo (el logo dice 11 7666-5975; una etiqueta vieja decía 1138134614).

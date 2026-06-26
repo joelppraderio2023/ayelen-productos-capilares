@@ -221,6 +221,21 @@
   .card .consultar:hover{ background:rgba(37,211,102,.22); }
   .card .consultar svg{ width:18px; height:18px; }
 
+  /* ====== Grupos de categoría dentro del catálogo ====== */
+  .cat-group{ margin-bottom:50px; }
+  .cat-group:last-child{ margin-bottom:0; }
+  .cat-title{
+    display:flex; align-items:center; gap:16px; margin:0 0 24px;
+    font-family:'Cormorant Garamond',serif; font-weight:600;
+    font-size:1.7rem; color:var(--lila-soft);
+  }
+  .cat-title::after{ content:''; flex:1; height:1px; background:linear-gradient(90deg, rgba(217,182,118,.5), transparent); }
+  .cat-title .count{
+    font-family:'Montserrat',sans-serif; font-weight:400; font-size:.74rem;
+    color:var(--gold); border:1px solid rgba(217,182,118,.4);
+    border-radius:50px; padding:3px 12px; white-space:nowrap;
+  }
+
   /* ====== Galería de productos ====== */
   .gallery{ background:var(--bg-2); }
   .gallery-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
@@ -333,7 +348,7 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413z"/></svg>
         Consultar por WhatsApp
       </a>
-      <a class="btn btn-ghost" href="#catalogo">Ver alisados</a>
+      <a class="btn btn-ghost" href="#catalogo">Ver productos</a>
     </div>
     <div class="divider reveal"><span></span>✦<span></span></div>
   </div>
@@ -367,11 +382,11 @@
   <div class="wrap">
     <div class="section-head">
       <span class="kicker">Nuestra línea</span>
-      <h2 class="gold-text">Alisados</h2>
-      <p>Elegí el que mejor se adapta a tu cabello y consultá precio y disponibilidad por WhatsApp.</p>
+      <h2 class="gold-text">Catálogo completo</h2>
+      <p>Alisados, nutriciones y tratamientos. Elegí el que buscás y consultá precio y disponibilidad por WhatsApp.</p>
     </div>
-    <div class="catalog-grid" id="catalog-grid">
-      <!-- las tarjetas se generan con JS desde la lista de abajo -->
+    <div id="catalog-cats">
+      <!-- las categorías y tarjetas se generan con JS desde la lista de abajo -->
     </div>
   </div>
 </section>
@@ -438,41 +453,75 @@
   // ====== Configuración fácil de editar ======
   var WHATSAPP = "5491176665975"; // número en formato internacional (54 9 11 ...)
 
-  // Lista de alisados. La clienta puede editar nombre y descripción aquí.
-  // OJO: revisar que las descripciones sean exactas para cada producto.
-  var ALISADOS = [
-    { nombre:"3 en 1",            desc:"Limpia, alisa y nutre el cabello en un solo paso. Práctico y completo." },
-    { nombre:"XXL",               desc:"Rendimiento extra, ideal para cabellos largos o muy abundantes." },
-    { nombre:"Bioplex",           desc:"Reconstrucción profunda de la fibra capilar mientras alisa." },
-    { nombre:"Cherry",            desc:"Nutrición y brillo intenso con extracto de cereza." },
-    { nombre:"Espejo",            desc:"Acabado liso espejado con máximo brillo y reflejos." },
-    { nombre:"Extra Fuerte",      desc:"Para cabellos muy rebeldes o con mucho frizz. Liso de larga duración." },
-    { nombre:"Siliconado",        desc:"Sellado con siliconas para suavidad, manejo y antifrizz." },
-    { nombre:"Cirugía Capilar",   desc:"Tratamiento intensivo para recuperar cabellos muy dañados." },
-    { nombre:"Diamante",          desc:"Acabado premium con luminosidad y suavidad de lujo." },
-    { nombre:"Cristal",           desc:"Liso pulido con efecto cristalino y sedoso." },
-    { nombre:"Japonés",           desc:"Técnica japonesa para un liso prolijo y duradero." },
-    { nombre:"Colágeno y Argán",  desc:"Hidratación y elasticidad con colágeno y aceite de argán." },
-    { nombre:"Ácido Hialurónico", desc:"Hidratación profunda que rellena y revitaliza la fibra." },
-    { nombre:"Plex",              desc:"Reconstrucción de enlaces internos para un cabello fortalecido." }
+  // Catálogo por categorías. La clienta puede editar nombre y descripción aquí.
+  // Las descripciones de Japonés y Diamante son las textuales que pasó la clienta;
+  // el resto son borradores a confirmar.
+  var CATALOGO = [
+    { categoria:"Alisados", etiqueta:"Alisado", items:[
+      { nombre:"Japonés",           desc:"Tratamiento térmico-químico que deja el pelo completamente liso y sedoso de forma permanente. Elimina el frizz, aporta brillo intenso y resiste la humedad sin usar plancha a diario." },
+      { nombre:"Diamante",          desc:"Combina keratina, aceites nutritivos y micropartículas iluminadoras. Alisa la hebra capilar otorgándole una luminosidad y suavidad extremas." },
+      { nombre:"3 en 1",            desc:"Limpia, alisa y nutre el cabello en un solo paso. Práctico y completo." },
+      { nombre:"XXL",               desc:"Rendimiento extra, ideal para cabellos largos o muy abundantes." },
+      { nombre:"Bio Plex",          desc:"Reconstrucción profunda de la fibra capilar mientras alisa." },
+      { nombre:"Cherry",            desc:"Nutrición y brillo intenso con extracto de cereza." },
+      { nombre:"Espejo",            desc:"Acabado liso espejado con máximo brillo y reflejos." },
+      { nombre:"Extra Fuerte",      desc:"Para cabellos muy rebeldes o con mucho frizz. Liso de larga duración." },
+      { nombre:"Siliconado",        desc:"Sellado con siliconas para suavidad, manejo y antifrizz." },
+      { nombre:"Cirugía",           desc:"Tratamiento intensivo para recuperar cabellos muy dañados." },
+      { nombre:"Cristal",           desc:"Liso pulido con efecto cristalino y sedoso." },
+      { nombre:"Colágeno y Argán",  desc:"Hidratación y elasticidad con colágeno y aceite de argán." },
+      { nombre:"Ácido Hialurónico", desc:"Hidratación profunda que rellena y revitaliza la fibra." },
+      { nombre:"Plex",              desc:"Reconstrucción de enlaces internos para un cabello fortalecido." }
+    ]},
+    { categoria:"Nutriciones", etiqueta:"Nutrición", items:[
+      { nombre:"Cirugía",           desc:"Nutrición intensiva tipo cirugía capilar para cabellos muy dañados." },
+      { nombre:"Diamante",          desc:"Nutrición con acabado luminoso y suavidad de lujo." },
+      { nombre:"Aceite de Coco",    desc:"Hidratación profunda con aceite de coco: suavidad y brillo natural." },
+      { nombre:"Colágeno y Argán",  desc:"Repone elasticidad y nutrición con colágeno y argán." },
+      { nombre:"Brasilera",         desc:"Nutrición intensa para un cabello suave y manejable." },
+      { nombre:"Botox",             desc:"Rellena, alisa y revitaliza la fibra capilar." }
+    ]},
+    { categoria:"Tratamientos", etiqueta:"Tratamiento", items:[
+      { nombre:"Botox",             desc:"Rellena y rejuvenece la fibra: menos frizz, más suavidad y brillo." },
+      { nombre:"Queratina",         desc:"Repone la queratina natural del cabello, lo fortalece y lo disciplina." },
+      { nombre:"Biotina",           desc:"Fortalece el cabello y le aporta cuerpo y vitalidad." },
+      { nombre:"Levanta Muerto",    desc:"Reactiva y revive cabellos apagados y sin vida." },
+      { nombre:"Oro Líquido",       desc:"Aceite multiuso que aporta brillo, suavidad y protección." },
+      { nombre:"Matizador Violeta", desc:"Acondicionador matizador que neutraliza los tonos amarillos en un paso." }
+    ]}
   ];
 
-  // ====== Genera las tarjetas del catálogo ======
+  // ====== Genera las categorías y tarjetas del catálogo ======
   (function(){
-    var grid = document.getElementById('catalog-grid');
+    var host = document.getElementById('catalog-cats');
     var waIcon = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413z"/></svg>';
-    ALISADOS.forEach(function(p){
-      var msg = encodeURIComponent("Hola Ayelen! Quiero consultar por el Alisado " + p.nombre + " 💜");
-      var card = document.createElement('div');
-      card.className = 'card reveal';
-      card.innerHTML =
-        '<span class="tag">Alisado</span>' +
-        '<h3><span class="a">' + p.nombre + '</span></h3>' +
-        '<p>' + p.desc + '</p>' +
-        '<a class="consultar" target="_blank" rel="noopener" href="https://wa.me/' + WHATSAPP + '?text=' + msg + '">' +
-          waIcon + 'Consultar' +
-        '</a>';
-      grid.appendChild(card);
+    CATALOGO.forEach(function(cat){
+      var group = document.createElement('div');
+      group.className = 'cat-group';
+
+      var title = document.createElement('h3');
+      title.className = 'cat-title reveal';
+      title.innerHTML = cat.categoria + '<span class="count">' + cat.items.length + ' opciones</span>';
+      group.appendChild(title);
+
+      var grid = document.createElement('div');
+      grid.className = 'catalog-grid';
+      cat.items.forEach(function(p){
+        var nombreCompleto = cat.etiqueta + ' ' + p.nombre;
+        var msg = encodeURIComponent("Hola Ayelen! Quiero consultar por el " + nombreCompleto + " 💜");
+        var card = document.createElement('div');
+        card.className = 'card reveal';
+        card.innerHTML =
+          '<span class="tag">' + cat.etiqueta + '</span>' +
+          '<h3><span class="a">' + p.nombre + '</span></h3>' +
+          '<p>' + p.desc + '</p>' +
+          '<a class="consultar" target="_blank" rel="noopener" href="https://wa.me/' + WHATSAPP + '?text=' + msg + '">' +
+            waIcon + 'Consultar' +
+          '</a>';
+        grid.appendChild(card);
+      });
+      group.appendChild(grid);
+      host.appendChild(group);
     });
   })();
 
